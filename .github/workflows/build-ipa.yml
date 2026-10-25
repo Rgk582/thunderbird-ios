@@ -12,6 +12,9 @@ concurrency:
   group: build-ipa-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  XCODE_VERSION: "26.4"
+
 jobs:
   build:
     runs-on: macos-26
@@ -19,16 +22,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: |
+          sudo xcode-select -s "/Applications/Xcode_${XCODE_VERSION}.app" || ls /Applications | grep -i xcode
+          xcodebuild -version
+          xcodebuild -downloadPlatform iOS || true
 
       - name: Resolve package dependencies
         run: |
+          mkdir -p out
+          set +e
           xcodebuild -resolvePackageDependencies \
             -workspace Thunderbird.xcworkspace \
-            -scheme Thunderbird
+            -scheme Thunderbird > out/resolve.log 2>&1
+          echo $? > out/resolve-status.txt
+          tail -40 out/resolve.log
+          exit $(cat out/resolve-status.txt)
 
       - name: Archive (Release, unsigned)
         run: |
-          set -o pipefail
+          set +e
           xcodebuild clean archive \
             -workspace Thunderbird.xcworkspace \
             -scheme Thunderbird \
@@ -36,8 +52,11 @@ jobs:
             -configuration Release \
             -destination 'generic/platform=iOS' \
             -archivePath build/Thunderbird.xcarchive \
-            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
-            2>&1 | tee build.log | tail -40
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" > out/archive.log 2>&1
+          echo $? > out/archive-status.txt
+          grep -E "error:" out/archive.log | sort -u | head -100 > out/archive-errors.txt
+          tail -40 out/archive.log
+          exit $(cat out/archive-status.txt)
 
       - name: Package IPA
         run: |
@@ -47,8 +66,9 @@ jobs:
           zip -qry Thunderbird.ipa Payload
           ls -lh Thunderbird.ipa
           unzip -l Thunderbird.ipa | head -15
-          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$APP/Info.plist"
-          /usr/libexec/PlistBuddy -c "Print :MinimumOSVersion" "$APP/Info.plist"
+          /usr/libexec/PlistBuddy -c "Print :CFBundleIdentifier" "$APP/Info.plist" | tee out/bundle-id.txt
+          /usr/libexec/PlistBuddy -c "Print :MinimumOSVersion" "$APP/Info.plist" | tee out/min-os.txt
+          ls Payload/*.app/_CodeSignature 2>&1 | tee out/codesign-check.txt || true
 
       - name: Publish release
         env:
@@ -58,3 +78,11 @@ jobs:
           gh release create "$TAG" Thunderbird.ipa \
             --title "Thunderbird iOS unsigned build ${{ github.run_number }}" \
             --notes "Unsigned build of upstream main at ${GITHUB_SHA::7}. Sign it with your own certificate (Feather) before installing."
+
+      - name: Save results to ci-errors
+        if: always()
+        run: |
+          mkdir -p out && git rev-parse --short HEAD > out/commit.txt
+          cd out && git init -q -b ci-errors && git add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "Build results ${{ github.run_number }}"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci-errors
