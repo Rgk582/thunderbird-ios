@@ -1,0 +1,165 @@
+Command line invocation:
+    /Applications/Xcode_26.4.1.app/Contents/Developer/usr/bin/xcodebuild -resolvePackageDependencies -workspace Thunderbird.xcworkspace -scheme Thunderbird
+
+Resolve Package Graph
+
+Fetching from https://github.com/thunderbird/swift-rich-html-editor
+
+Fetching from https://github.com/apple/swift-argument-parser
+
+Fetching from https://github.com/apple/swift-async-dns-resolver
+
+Fetching from https://github.com/apple/swift-nio
+
+Fetching from https://github.com/apple/swift-nio-extras
+
+Fetching from https://github.com/apple/swift-nio-imap
+
+Fetching from https://github.com/apple/swift-nio-ssl
+
+Fetching from https://github.com/apple/swift-nio-transport-services
+
+Fetching from https://github.com/apple/swift-collections
+
+Fetching from https://github.com/apple/swift-atomics.git
+
+Fetching from https://github.com/apple/swift-async-algorithms.git
+
+Fetching from https://github.com/apple/swift-log
+
+Fetching from https://github.com/swift-server/swift-service-lifecycle.git
+
+Fetching from https://github.com/apple/swift-asn1.git
+
+Fetching from https://github.com/apple/swift-certificates.git
+
+Fetching from https://github.com/apple/swift-algorithms.git
+
+Fetching from https://github.com/apple/swift-http-types.git
+
+Fetching from https://github.com/apple/swift-nio-http2.git
+
+Fetching from https://github.com/apple/swift-system.git
+
+Fetching from https://github.com/apple/swift-http-structured-headers.git
+
+Fetching from https://github.com/apple/swift-numerics.git
+
+Fetching from https://github.com/apple/swift-crypto.git
+
+Creating working copy of package ‘swift-system’
+
+Checking out 1.8.1 of package ‘swift-system’
+
+Creating working copy of package ‘swift-nio-extras’
+
+Checking out main (8e1249b) of package ‘swift-nio-extras’
+
+Creating working copy of package ‘swift-algorithms’
+
+Checking out 1.2.1 of package ‘swift-algorithms’
+
+Creating working copy of package ‘swift-rich-html-editor’
+
+Checking out main (db7b260) of package ‘swift-rich-html-editor’
+
+Creating working copy of package ‘swift-async-dns-resolver’
+
+Checking out main (5320c7b) of package ‘swift-async-dns-resolver’
+
+Creating working copy of package ‘swift-nio-http2’
+
+Checking out 1.46.0 of package ‘swift-nio-http2’
+
+Creating working copy of package ‘swift-nio-ssl’
+
+Checking out main (15e0b9e) of package ‘swift-nio-ssl’
+
+Creating working copy of package ‘swift-http-types’
+
+Checking out 1.8.0 of package ‘swift-http-types’
+
+Creating working copy of package ‘swift-service-lifecycle’
+
+Checking out 2.13.0 of package ‘swift-service-lifecycle’
+
+Creating working copy of package ‘swift-async-algorithms’
+
+Checking out 1.1.7 of package ‘swift-async-algorithms’
+
+Creating working copy of package ‘swift-log’
+
+Checking out 1.16.2 of package ‘swift-log’
+
+Creating working copy of package ‘swift-nio-imap’
+
+Checking out main (f5fa7d3) of package ‘swift-nio-imap’
+
+Creating working copy of package ‘swift-certificates’
+
+Checking out 1.21.1 of package ‘swift-certificates’
+
+Creating working copy of package ‘swift-atomics’
+
+Checking out 1.3.1 of package ‘swift-atomics’
+
+Creating working copy of package ‘swift-collections’
+
+Checking out 1.7.5 of package ‘swift-collections’
+
+Creating working copy of package ‘swift-crypto’
+
+Checking out 5.0.3 of package ‘swift-crypto’
+
+Creating working copy of package ‘swift-http-structured-headers’
+
+Checking out 1.7.0 of package ‘swift-http-structured-headers’
+
+Creating working copy of package ‘swift-numerics’
+
+Checking out 1.1.1 of package ‘swift-numerics’
+
+Creating working copy of package ‘swift-nio’
+
+Checking out main (108daca) of package ‘swift-nio’
+
+Creating working copy of package ‘swift-argument-parser’
+
+Checking out main (38ca4ec) of package ‘swift-argument-parser’
+
+Creating working copy of package ‘swift-nio-transport-services’
+
+Checking out main (f85ed68) of package ‘swift-nio-transport-services’
+
+Creating working copy of package ‘swift-asn1’
+
+Checking out 1.7.3 of package ‘swift-asn1’
+
+
+Resolved source packages:
+  Core: /Users/runner/work/thunderbird-ios/thunderbird-ios/Core
+  swift-nio-transport-services: https://github.com/apple/swift-nio-transport-services @ main (f85ed68)
+  swift-certificates: https://github.com/apple/swift-certificates.git @ 1.21.1
+  swift-atomics: https://github.com/apple/swift-atomics.git @ 1.3.1
+  swift-nio-ssl: https://github.com/apple/swift-nio-ssl @ main (15e0b9e)
+  swift-http-types: https://github.com/apple/swift-http-types.git @ 1.8.0
+  swift-nio-imap: https://github.com/apple/swift-nio-imap @ main (f5fa7d3)
+  swift-numerics: https://github.com/apple/swift-numerics.git @ 1.1.1
+  swift-crypto: https://github.com/apple/swift-crypto.git @ 5.0.3
+  Bolt: /Users/runner/work/thunderbird-ios/thunderbird-ios/Bolt
+  swift-nio-extras: https://github.com/apple/swift-nio-extras @ main (8e1249b)
+  swift-system: https://github.com/apple/swift-system.git @ 1.8.1
+  swift-collections: https://github.com/apple/swift-collections @ 1.7.5
+  swift-argument-parser: https://github.com/apple/swift-argument-parser @ main (38ca4ec)
+  swift-asn1: https://github.com/apple/swift-asn1.git @ 1.7.3
+  swift-nio-http2: https://github.com/apple/swift-nio-http2.git @ 1.46.0
+  swift-async-algorithms: https://github.com/apple/swift-async-algorithms.git @ 1.1.7
+  swift-http-structured-headers: https://github.com/apple/swift-http-structured-headers.git @ 1.7.0
+  InfomaniakRichHTMLEditor: https://github.com/thunderbird/swift-rich-html-editor @ main (db7b260)
+  swift-service-lifecycle: https://github.com/swift-server/swift-service-lifecycle.git @ 2.13.0
+  swift-async-dns-resolver: https://github.com/apple/swift-async-dns-resolver @ main (5320c7b)
+  swift-nio: https://github.com/apple/swift-nio @ main (108daca)
+  swift-algorithms: https://github.com/apple/swift-algorithms.git @ 1.2.1
+  swift-log: https://github.com/apple/swift-log @ 1.16.2
+
+resolved source packages: Core, swift-nio-transport-services, swift-certificates, swift-atomics, swift-nio-ssl, swift-http-types, swift-nio-imap, swift-numerics, swift-crypto, Bolt, swift-nio-extras, swift-system, swift-collections, swift-argument-parser, swift-asn1, swift-nio-http2, swift-async-algorithms, swift-http-structured-headers, InfomaniakRichHTMLEditor, swift-service-lifecycle, swift-async-dns-resolver, swift-nio, swift-algorithms, swift-log

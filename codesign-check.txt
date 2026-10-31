@@ -1,0 +1,1 @@
+ls: Payload/*.app/_CodeSignature: No such file or directory
